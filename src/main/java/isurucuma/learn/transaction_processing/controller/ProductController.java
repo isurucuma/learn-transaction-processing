@@ -21,18 +21,21 @@ public class ProductController {
     @GetMapping
     public ApiResponse<List<ProductResponseDto>> getAllProducts() {
         // Logic to get the product
-        return new ApiResponse<>("Success, products retrieved!", "200", List.of(new ProductResponseDto(1L, "Product1", 100.0, 1)));
+        List<ProductResponseDto> products = productService.getAllProducts();
+        return new ApiResponse<>("Success, products retrieved!", "200", products);
     }
 
     @GetMapping(path = "/{productId}")
     public ApiResponse<ProductResponseDto> getProductById(@PathVariable Long productId) {
         // Logic to get the product by ID
-        return new ApiResponse<>("Success, product retrieved!", "200", new ProductResponseDto(productId, "Product" + productId, 100.0, 1));
+        ProductResponseDto product = productService.getProductById(productId);
+        return new ApiResponse<>("Success, product retrieved!", "200", product);
     }
 
     @PostMapping
     public ApiResponse<ProductResponseDto> createProduct(@RequestBody CreateProductRequestDto productRequest) {
         // Logic to create a new product
-        return new ApiResponse<>("Success, product created!", "201", new ProductResponseDto(1L, productRequest.getName(), productRequest.getPrice(), 1  ));
+        ProductResponseDto productResponse = productService.createProduct(productRequest);
+        return new ApiResponse<>("Success, product created!", "201", productResponse);
     }
 }

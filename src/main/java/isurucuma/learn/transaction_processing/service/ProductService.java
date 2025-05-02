@@ -41,13 +41,14 @@ public class ProductService {
     }
 
     public ProductResponseDto updateProduct(Long productId, CreateProductRequestDto productRequest) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
-        product.setName(productRequest.getName());
-        product.setPrice(productRequest.getPrice());
-        product.setStockQuantity(productRequest.getQuantity());
-        Product updatedProduct = productRepository.save(product);
-        return mapToDto(updatedProduct);
+        throw new RuntimeException("DB error");
+//        Product product = productRepository.findById(productId)
+//                .orElseThrow(() -> new RuntimeException("Product not found"));
+//        product.setName(productRequest.getName());
+//        product.setPrice(productRequest.getPrice());
+//        product.setStockQuantity(productRequest.getQuantity());
+//        Product updatedProduct = productRepository.save(product);
+//        return mapToDto(updatedProduct);
     }
 
     public void deleteProduct(Long productId) {
